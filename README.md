@@ -4,6 +4,8 @@
 
 WEB服务API地址为 http://www.fifacoin.com/payment/create
 
+测试环境注册地址 http://demo.fifacoin.com/payment/create
+
 WEB服务API创建交易时所有参数通过key-value POST形式提交。
 
 | 参数          | 描述           | 类型  | 是否必填 | 参数说明 |
