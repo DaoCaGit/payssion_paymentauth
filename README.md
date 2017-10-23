@@ -135,7 +135,6 @@ updated：交易更新时间
 ```
 $msg = implode("|", array($key, $pm_id, $amount, $currency, $order_id, $secret));
 $api_sig = md5($msg);
-
 ```
 
 ## 异步通知签名
@@ -145,8 +144,16 @@ $api_sig = md5($msg);
 
 ## 交易查询签名
 
-暂未做验证
+交易查询签名api_sig生成分两步骤：
 
+1、将api_key, transaction_id, order_id, 以及应用的sercret_key字符串，以 “|”为分隔符串联成一个字符串
+
+2、将第一步骤串联起来的的字符串经md5加密生成最终的notify_sig 具体代码示例：
+
+```
+$msg = implode("|", array($key, $transaction_id, $order_id, $secret));
+$api_sig = md5($msg);
+```
 
 ## 支付方式（pm）
 
