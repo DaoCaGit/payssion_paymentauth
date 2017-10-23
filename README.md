@@ -58,18 +58,18 @@ WEB服务API创建交易时所有参数通过key-value POST形式提交。
 
 ### 服务器异步通知
 
-1、通过 POST 方式发送通知信息,主要参数如下： 
+1、通过 POST 方式发送通知信息,主要参数如下：   
 pm_id：支付方式id  
-transaction_id： Payssion平台交易号，非商户订单号  
+transaction_id： Payssion平台交易号
 order_id：商家订单号  
-sub_track_id：其他订单跟踪信息
-amount：订单金额
-paid：已支付金额
-net：扣除先后续费后净额
-currency：交易币种
-description：订单描述
-state：支付状态
-notify_sig:：异步通知签名，具体规则参考签名规则。
+sub_track_id：其他订单跟踪信息  
+amount：订单金额  
+paid：已支付金额  
+net：扣除先后续费后净额  
+currency：交易币种  
+description：订单描述   
+state：支付状态  
+notify_sig:：异步通知签名，具体规则参考签名规则。  
 
 2、state ：支付状态，主要取值如下：
 
@@ -165,7 +165,7 @@ updated：交易更新时间
 
 ## 创建交易签名
 
-创建交易签名api_sig生成分两步骤：
+创建交易签名sig生成分两步骤：
 
 1、将key, pm, amount, currency, order_id,以及该应用的secret字符串，以 “|”为分隔符串联成一个字符串
 
@@ -178,16 +178,25 @@ $api_sig = md5($msg);
 
 ## 异步通知签名
 
-暂未做验证
+异步通知签名notify_sig生成分两步骤：
+
+1、将key, pm_id, amount, currency, order_id, state以及应用的sercret字符串，以 “|”为分隔符串联成一个字符串  
+
+2、将第一步骤串联起来的的字符串经md5加密生成最终的notify_sig 具体代码示例：
+
+```
+$msg = implode("|", array($key, $pm_id, $amount, $currency,$order_id, $state, $secret));
+$notify_sig = md5($msg);
+```
 
 
 ## 交易查询签名
 
-交易查询签名api_sig生成分两步骤：
+交易查询签名sig生成分两步骤：
 
-1、将api_key, transaction_id, order_id, 以及应用的sercret_key字符串，以 “|”为分隔符串联成一个字符串
+1、将key, transaction_id, order_id, 以及应用的sercret字符串，以 “|”为分隔符串联成一个字符串
 
-2、将第一步骤串联起来的的字符串经md5加密生成最终的notify_sig 具体代码示例：
+2、将第一步骤串联起来的的字符串经md5加密生成最终的sig 具体代码示例：
 
 ```
 $msg = implode("|", array($key, $transaction_id, $order_id, $secret));
