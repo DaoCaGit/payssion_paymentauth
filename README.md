@@ -205,10 +205,9 @@ $api_sig = md5($msg);
 
 ## 支付方式（pm）
 
-| 参数          | pm           |
+| 参数          | pm          |
 | ------------- |-------------|
-| 支付宝         | alipay          |
-| 微信支付       | wechatpayments          |
-| paypal支付     | paypal       |
+| 支付宝         | alipay_cn   |
+| 微信支付       | tenpay_cn   |
 
 
