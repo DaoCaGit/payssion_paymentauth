@@ -104,24 +104,24 @@ http://www.fifacoin.com/payment/getDetail
 }    
 
 ```
-transaction
+#### transaction
 
-交易信息，主要字段有： transaction_id：Payssion平台交易号
-app_name：应用名称
-pm_id：支付方式id，请联系Payssion技术索取pm_id
-currency：交易币种
-trackid：商家订单号
-subtrackid：其他订单跟踪信息
-amount：订单金额
-paid：已支付金额
-net：扣除先后续费后净额
-state：支付状态
-fees：费用
-fees_add：额外费用
-refund：已退款金额
-refund_fees：退款费用
-created：交易创建时间
-updated：交易更新时间
+交易信息，主要字段有： transaction_id：Payssion平台交易号  
+app_name：应用名称  
+pm_id：支付方式id，请联系Payssion技术索取pm_id  
+currency：交易币种  
+trackid：商家订单号  
+subtrackid：其他订单跟踪信息  
+amount：订单金额  
+paid：已支付金额  
+net：扣除先后续费后净额  
+state：支付状态  
+fees：费用  
+fees_add：额外费用  
+refund：已退款金额  
+refund_fees：退款费用  
+created：交易创建时间  
+updated：交易更新时间  
 
 
 ## 创建交易签名
