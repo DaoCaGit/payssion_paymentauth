@@ -173,7 +173,7 @@ updated：交易更新时间
 
 ```
 $msg = implode("|", array($key, $pm_id, $amount, $currency, $order_id, $secret));
-$api_sig = md5($msg);
+$sig = md5($msg);
 ```
 
 ## 异步通知签名
@@ -200,7 +200,7 @@ $notify_sig = md5($msg);
 
 ```
 $msg = implode("|", array($key, $transaction_id, $order_id, $secret));
-$api_sig = md5($msg);
+$sig = md5($msg);
 ```
 
 ## 支付方式（pm）
