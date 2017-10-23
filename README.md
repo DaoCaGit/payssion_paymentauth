@@ -9,7 +9,7 @@ WEB服务API地址为 http://www.fifacoin.com/payment/create
 WEB服务API创建交易时所有参数通过key-value POST形式提交。
 
 | 参数          | 描述           | 类型  | 是否必填 | 参数说明 |
-| ------------- |:-------------:| :-----:| :-----:|:-----:|
+| ------------- |-------------| -----| -----|-----|
 | amount        | 支付金额       | string | 必填 | 小数点精确到后面两位 |
 | currency      | centered      | string  | 必填 | 如USD |
 | order_id      | 订单号         | string  | 必填 |      |
@@ -24,7 +24,7 @@ WEB服务API创建交易时所有参数通过key-value POST形式提交。
 创建交易响应参数说明(json格式)
 
 | 参数          | 描述           | 类型  | 是否必填 | 参数说明 |
-| ------------- |:-------------:| -----:| -----:| -----:|
+| ------------- |-------------| -----| -----| -----|
 | status        | 状态          | int | 必填 | 0 失败，1 成功 |
 | msg           | 信息          | string  | 可选 |  |
 | data          | 返回数据       | string  | 必填 |      |
@@ -51,6 +51,45 @@ WEB服务API创建交易时所有参数通过key-value POST形式提交。
 }
 ```
 
+### 页面跳转同步通知
+
+会在同步通知页面后面添加如下参数： transaction_id, state, order_id
+
+
+### 服务器异步通知
+
+1、通过 POST 方式发送通知信息,主要参数如下： 
+pm_id：支付方式id  
+transaction_id： Payssion平台交易号，非商户订单号  
+order_id：商家订单号  
+sub_track_id：其他订单跟踪信息
+amount：订单金额
+paid：已支付金额
+net：扣除先后续费后净额
+currency：交易币种
+description：订单描述
+state：支付状态
+notify_sig:：异步通知签名，具体规则参考签名规则。
+
+2、state ：支付状态，主要取值如下：
+
+| 支付状态          | 说明        |
+| -------------|-------------|
+| error          | 支付发生错误  |
+| pending         | 未完成支付  |
+| completed       | 支付成功  |
+| paid_partial    | 部分支付，用户只支付了部分金额  |
+| failed          | 支付失败  |
+| cancelled       | 交易被取消  |
+| cancelled_by_user  | 用户取消支付  |
+| rejected_by_bank  | 银行拒绝  |
+| expired  | 交易失效  |
+| refunded  | 退款成功  |
+| refund_pending  | 已申请退款，正在处理退款  |
+| refund_failed  | 退款失败  |
+| chargeback  | 拒付  |
+
+
 ### 交易查询
 
 线上环境地址
@@ -63,7 +102,7 @@ http://www.fifacoin.com/payment/getDetail
 所有参数通过key-value POST形式提交：
 
 | 参数          | 描述           | 类型  | 是否必填 | 参数说明 |
-| ------------- |:-------------:| :-----:| :-----:|:-----:|
+| ------------- |-------------| -----| -----|-----|
 | api_key       | 应用ID	       | string | 必填 | 添加应用成功后可以看到该应用的key |
 | transaction_id| 交易号         | string  | 必填 | 如USD |
 | sig           | 请求签名       | string  | 必填 | api接入签名验证， 具体可参考签名生成规则 |
@@ -158,7 +197,7 @@ $api_sig = md5($msg);
 ## 支付方式（pm）
 
 | 参数          | pm           |
-| ------------- |:-------------:|
+| ------------- |-------------|
 | 支付宝         | alipay          |
 | 微信支付       | wechatpayments          |
 | paypal支付     | paypal       |
